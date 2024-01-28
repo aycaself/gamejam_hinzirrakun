@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,9 +12,16 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isFacingRight = true;
     Rigidbody2D rb;
+    Animator anim;
+
+    void Update()
+    {
+        CheckRotation();
+    }
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -23,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     {
         movementDirection = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(movementDirection * speed, rb.velocity.y);
+        anim.SetFloat("runSpeed", Mathf.Abs (movementDirection * speed));
     }
 
     void CheckRotation()
