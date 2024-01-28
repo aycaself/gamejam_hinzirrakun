@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class Poop : MonoBehaviour
 {
@@ -8,11 +9,13 @@ public class Poop : MonoBehaviour
     public int damage = 40;
     public Rigidbody2D rb;
 
- 
+
     void Start()
     {
         rb.velocity = transform.right * speed;
+        
     }
+
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
@@ -21,6 +24,12 @@ public class Poop : MonoBehaviour
         {
             enemy.TakeDamage(damage);
         }
+        Destroy(gameObject);
+    }
+
+    void OnBecameInvisible()
+    {
+        enabled = false;
         Destroy(gameObject);
     }
 

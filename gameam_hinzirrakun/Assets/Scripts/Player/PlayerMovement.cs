@@ -37,12 +37,12 @@ public class PlayerMovement : MonoBehaviour
 
     void CheckRotation()
     {
-        if (isFacingRight && movementDirection < 0)
+        if (movementDirection > 0 && !isFacingRight)
         {
             Flip();
         }
 
-        else if (!isFacingRight && movementDirection > 0)
+        else if (movementDirection<0 && isFacingRight)
         {
             Flip();
         }
